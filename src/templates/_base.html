@@ -15,6 +15,10 @@
     <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
 
     {% compress css %}
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/components.css' %}">
+        <link rel="stylesheet" href="{% static 'css/utilities.css' %}">
+        <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
