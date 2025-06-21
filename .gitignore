@@ -8,6 +8,7 @@ src/static/CACHE
 test/
 log/
 db.sqlite3
+.pdm-python
 
 ### VisualStudioCode template
 .vscode/*

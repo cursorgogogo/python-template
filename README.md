@@ -117,7 +117,13 @@ pdm install
 这个操作会生成一个 `db.sqlite3` 文件，本地测试推荐使用 SQLite 数据库。
 
 ```
-python manage.py migrate
+python -m pdm run python src/manage.py migrate
+```
+
+### 启动项目
+
+```
+python -m pdm run python src/manage.py runserver 127.0.0.1:8080
 ```
 
 ### 配置缓存（可选）
