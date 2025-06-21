@@ -1,0 +1,160 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    DjangoStarter - 快速开发框架
+{% endblock %}
+
+{% block content %}
+    <section class="container mx-auto px-4 py-8 md:py-16 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <!-- 头部区域 -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                    Welcome to <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-extrabold">DjangoStarter</span>!
+                </h1>
+                <div class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                    <p>DjangoStarter v3 是下一代 Django 项目快速开发模板，专为提升开发效率和性能而设计。</p>
+                    <p>结合了 Django 的丰富功能和 Django-Ninja 的性能、灵活、简洁特性，v3
+                        版本旨在为开发者提供一个更加强大、简洁和高速的开发体验。</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://github.com/Deali-Axy/DjangoStarter" target="_blank"
+                       class="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                        <i class="fab fa-github mr-2"></i>
+                        项目主页
+                    </a>
+                    <a href="/api/docs"
+                       class="inline-flex items-center px-6 py-3 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors">
+                        <i class="fas fa-book mr-2"></i>
+                        接口文档
+                    </a>
+                    <a href="/admin"
+                       class="inline-flex items-center px-6 py-3 rounded-lg bg-gray-600 text-white hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-cog mr-2"></i>
+                        管理后台
+                    </a>
+                    <a href="/demo"
+                       class="inline-flex items-center px-6 py-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-flask mr-2"></i>
+                        Demo
+                    </a>
+                </div>
+            </div>
+
+            <hr class="my-12 border-gray-200 dark:border-gray-700">
+
+            <!-- 功能卡片区域 -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- API文档卡片 -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-book text-2xl text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">API文档</h3>
+                        <p class="text-gray-600 dark:text-gray-400">查看完整的API接口文档</p>
+                        <a href="/api/docs"
+                           class="mt-4 inline-flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400">
+                            查看文档 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 管理后台卡片 -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-cog text-2xl text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">管理后台</h3>
+                        <p class="text-gray-600 dark:text-gray-400">系统管理与配置面板</p>
+                        <a href="/admin"
+                           class="mt-4 inline-flex items-center text-green-600 hover:text-green-700 dark:text-green-400">
+                            进入后台 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 更多功能卡片 -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105">
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-rocket text-2xl text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">更多功能</h3>
+                        <p class="text-gray-600 dark:text-gray-400">敬请期待更多功能</p>
+                        <span class="mt-4 inline-flex items-center text-purple-600 dark:text-purple-400">
+                            Coming Soon <i class="fas fa-ellipsis-h ml-2"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 相关资源区域 -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 相关项目 -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">相关项目</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">一些相关项目，可以参考一下，或许能找到有用的代码~</p>
+                    <ul class="space-y-3">
+                        {% for item in projects %}
+                            <li class="flex flex-col space-y-1 mb-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-chevron-right text-blue-600 dark:text-blue-400 mr-3"></i>
+                                    <a href="{{ item.url }}" target="_blank"
+                                       class="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold text-lg">
+                                        {{ item.title }}
+                                    </a>
+                                </div>
+                                {% if item.description %}
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm pl-6">{{ item.description }}</p>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- 相关博客 -->
+                <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">相关博客</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">这里有些关于Django开发的博客，可以看看~</p>
+                    <ul class="space-y-3">
+                        {% for item in blogs %}
+                            <li class="flex items-center">
+                                <i class="fas fa-chevron-right text-green-600 dark:text-green-400 mr-3"></i>
+                                <a href="{{ item.url }}" target="_blank"
+                                   class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                                    {{ item.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li class="flex items-center mt-4">
+                            <i class="fas fa-external-link-alt text-green-600 dark:text-green-400 mr-3"></i>
+                            <a href="https://www.cnblogs.com/deali/category/1799362.html" target="_blank"
+                               class="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                                查看更多
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center text-muted border-top mt-12">
+            Created by
+            <a href="https://github.com/Deali-Axy"
+               class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+               target="_blank">
+                DealiAxy</a>
+            &middot;
+            &copy;
+            <a href="https://deali.cn"
+               class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+               target="_blank">
+                CodeLab</a>
+            2025
+        </div>
+        <hr class="my-12 border-gray-200 dark:border-gray-700">
+    </section>
+{% endblock %}

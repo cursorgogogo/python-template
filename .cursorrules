@@ -1,0 +1,196 @@
+# DjangoStarter 项目 Cursor 规则
+
+## 项目概述
+这是一个基于 Django 的 RESTful API 开发模板项目，包含以下技术栈：
+- Django 5.0+ (Python 3.12)
+- Django Ninja (API 框架)
+- PDM (Python 包管理)
+- Docker & Docker Compose (容器化)
+- SQLite (默认数据库，支持 PostgreSQL/MySQL)
+- Redis (可选缓存，支持本地内存缓存)
+
+## 编码规范
+
+### Python/Django 规范
+1. **代码风格**: 遵循 PEP 8 规范，使用 Black 格式化
+2. **导入顺序**: 
+   - 标准库
+   - 第三方库
+   - Django 相关
+   - 本地应用
+3. **命名规范**:
+   - 类名: PascalCase (如 `UserProfile`)
+   - 函数/变量: snake_case (如 `get_user_data`)
+   - 常量: UPPER_SNAKE_CASE (如 `MAX_RETRY_COUNT`)
+4. **Django 模型**: 使用 `models.Model` 继承，字段名使用 snake_case
+5. **API 视图**: 使用 Django Ninja，遵循 RESTful 设计原则
+6. **文档字符串**: 所有公共函数和类必须有 docstring
+
+### 文件组织
+1. **应用结构**: 每个 Django 应用包含 models.py, views.py, urls.py, admin.py
+2. **API 结构**: 在 `apis/` 目录下按功能模块组织
+3. **模板结构**: 使用 `templates/` 目录，按应用分类
+4. **测试**: 每个应用包含 `tests/` 目录
+
+## 开发最佳实践
+
+### 数据库
+1. **数据库选择**: 
+   - 开发环境: 使用 SQLite (默认)
+   - 生产环境: 考虑 PostgreSQL 或 MySQL
+2. **迁移**: 每次模型变更都要创建迁移文件
+3. **查询优化**: 使用 `select_related()` 和 `prefetch_related()` 避免 N+1 查询
+4. **事务**: 在需要数据一致性的操作中使用数据库事务
+5. **索引**: 为常用查询字段添加索引
+
+### SQLite 特定规范
+1. **性能优化**:
+   - 使用 WAL 模式提高并发性能
+   - 配置适当的内存映射和缓存
+   - 定期运行 VACUUM 和 ANALYZE
+2. **备份策略**:
+   - 使用内置的 SQLite 管理器进行备份
+   - 定期备份数据库文件
+   - 保留多个备份版本
+3. **连接管理**:
+   - 设置合适的超时时间
+   - 允许多线程访问
+   - 使用连接池管理连接
+
+### 缓存策略
+1. **缓存选择**:
+   - 开发环境: 默认使用本地内存缓存
+   - 生产环境: 可选使用 Redis 或本地缓存
+   - 通过 `USE_REDIS` 环境变量控制
+2. **本地缓存**: 使用 Django 内置的 LocMemCache
+3. **Redis 缓存**: 使用 django-redis 后端
+4. **缓存键**: 使用有意义的键名，包含版本信息
+5. **缓存失效**: 在数据更新时及时清除相关缓存
+
+### 会话管理
+1. **会话存储**:
+   - 开发环境: 默认使用数据库存储
+   - 生产环境: 可选使用缓存或数据库存储
+   - 通过 `SESSION_ENGINE` 环境变量控制
+2. **会话安全**: 配置适当的 Cookie 安全选项
+3. **会话清理**: 定期清理过期会话数据
+
+### 安全考虑
+1. **认证**: 使用 Django 内置认证系统
+2. **权限**: 实现细粒度的权限控制
+3. **输入验证**: 使用 Django 表单和序列化器验证输入
+4. **CSRF**: 确保所有表单包含 CSRF 令牌
+5. **XSS**: 使用 Django 模板自动转义
+
+### API 设计
+1. **版本控制**: API 路径包含版本号 (如 `/api/v1/`)
+2. **状态码**: 使用标准 HTTP 状态码
+3. **响应格式**: 统一的 JSON 响应格式
+4. **错误处理**: 提供详细的错误信息和错误码
+5. **限流**: 使用 django-ratelimit 实现 API 限流
+
+## 代码生成
+
+### 使用内置代码生成器
+项目包含自定义代码生成器，位于 `src/django_starter/contrib/code_generator/`
+- 生成模型、视图、API、测试等代码
+- 遵循项目约定的代码结构
+- 自动生成文档字符串和类型注解
+
+### 生成命令
+```bash
+# 生成完整的 CRUD 应用
+python src/manage.py autocode app_name
+
+# 生成特定模块
+python src/manage.py autocode app_name --module models
+```
+
+## 测试规范
+1. **单元测试**: 为每个模型和视图编写测试
+2. **集成测试**: 测试 API 端点和用户流程
+3. **测试数据**: 使用 Factory Boy 或 Faker 生成测试数据
+4. **覆盖率**: 目标代码覆盖率 > 80%
+
+## 部署配置
+1. **环境变量**: 使用 `.env` 文件管理环境配置
+2. **Docker**: 使用多阶段构建优化镜像大小
+3. **健康检查**: 实现应用健康检查端点
+4. **监控**: 集成 Prometheus 指标收集
+
+## 性能优化
+1. **数据库索引**: 为常用查询字段添加索引
+2. **静态文件**: 使用 django-compressor 压缩静态文件
+3. **缓存**: 合理使用缓存减少数据库访问
+4. **异步任务**: 使用 Celery 处理耗时任务
+
+## 代码审查要点
+1. **功能完整性**: 确保功能按需求实现
+2. **代码质量**: 检查代码可读性和维护性
+3. **安全性**: 验证安全措施是否到位
+4. **性能**: 评估性能影响
+5. **测试覆盖**: 确保有足够的测试覆盖
+
+## 常用命令
+```bash
+# 开发服务器
+python src/manage.py runserver 127.0.0.1:18080
+
+# 启动 Django (无 Redis)
+python src/manage.py runserver 127.0.0.1:18080
+
+# 数据库迁移
+python src/manage.py makemigrations
+python src/manage.py migrate
+
+# 创建超级用户
+python src/manage.py createsuperuser
+
+# 运行测试
+python src/manage.py test
+
+# 收集静态文件
+python src/manage.py collectstatic
+
+# Docker 部署
+docker-compose up -d
+
+# Docker 部署 (无 Redis)
+docker-compose --profile redis up -d
+
+# SQLite 数据库管理
+python src/manage.py sqlite_backup backup
+python src/manage.py sqlite_backup optimize
+python src/manage.py sqlite_backup info
+python src/manage.py sqlite_backup check
+```
+
+## 环境配置
+
+### 开发环境 (推荐)
+```bash
+# 环境变量设置
+USE_REDIS=false
+USE_REDIS_IN_DEBUG=false
+SESSION_ENGINE=django.contrib.sessions.backends.db
+DATABASE_TYPE=sqlite
+```
+
+### 生产环境
+```bash
+# 环境变量设置
+USE_REDIS=true  # 可选
+SESSION_ENGINE=django.contrib.sessions.backends.cache  # 如果使用 Redis
+DATABASE_TYPE=postgresql  # 或 mysql
+```
+
+## 注意事项
+1. 始终使用中文注释和文档
+2. 遵循项目的目录结构和命名约定
+3. 在提交代码前运行测试和代码格式化
+4. 及时更新依赖包版本
+5. 保持代码库的整洁和可维护性
+6. 定期备份 SQLite 数据库
+7. 监控数据库性能和大小
+8. 根据项目需求选择是否使用 Redis
+9. 在开发阶段优先使用本地缓存和数据库存储 

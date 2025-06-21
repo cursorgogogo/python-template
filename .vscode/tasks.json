@@ -1,0 +1,388 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "启动 Django 开发服务器",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "runserver",
+                "127.0.0.1:18080"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "启动 Django (无 Redis)",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "runserver",
+                "127.0.0.1:18080"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}",
+                "env": {
+                    "USE_REDIS": "false",
+                    "USE_REDIS_IN_DEBUG": "false"
+                }
+            }
+        },
+        {
+            "label": "数据库迁移",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "makemigrations"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "应用数据库迁移",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "migrate"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "运行测试",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "test"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "收集静态文件",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "collectstatic",
+                "--noinput"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "创建超级用户",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "createsuperuser"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "代码格式化 (Black)",
+            "type": "shell",
+            "command": "black",
+            "args": [
+                "--line-length=88",
+                "--target-version=py312",
+                "src"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "导入排序 (isort)",
+            "type": "shell",
+            "command": "isort",
+            "args": [
+                "--profile=black",
+                "--line-length=88",
+                "src"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "代码检查 (flake8)",
+            "type": "shell",
+            "command": "flake8",
+            "args": [
+                "--max-line-length=88",
+                "--extend-ignore=E203,W503",
+                "src"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": [
+                {
+                    "pattern": [
+                        {
+                            "regexp": "^(.*):(\\d+):(\\d+):\\s+(\\w+)\\s+(.*)$",
+                            "file": 1,
+                            "line": 2,
+                            "column": 3,
+                            "severity": 4,
+                            "message": 5
+                        }
+                    ],
+                    "background": {
+                        "activeOnStart": true,
+                        "beginsPattern": "^.*flake8.*",
+                        "endsPattern": "^.*flake8.*"
+                    }
+                }
+            ]
+        },
+        {
+            "label": "Docker Compose 启动",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "up",
+                "-d"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker Compose 启动 (无 Redis)",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "--profile",
+                "redis",
+                "up",
+                "-d"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker Compose 停止",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": [
+                "down"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "清理 Python 缓存",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "clean_pycache.py"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "代码生成器",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "autocode"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "SQLite 数据库备份",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "sqlite_backup",
+                "backup"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "SQLite 数据库优化",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "sqlite_backup",
+                "optimize"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "SQLite 数据库信息",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "sqlite_backup",
+                "info"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "SQLite 数据库完整性检查",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "sqlite_backup",
+                "check"
+            ],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "SQLite 清理过期备份",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "src/manage.py",
+                "sqlite_backup",
+                "cleanup"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

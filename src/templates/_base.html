@@ -1,0 +1,59 @@
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}DjangoStarter - 下一代Django快速开发框架{% endblock %}">
+    <meta name="theme-color" content="#1e40af" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1e3a8a" media="(prefers-color-scheme: dark)">
+    <title>{% block title %}{% endblock %} - DjangoStarter</title>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+    {% compress css %}
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    {% endcompress %}
+
+    <link rel="stylesheet" href="{% static 'lib/font-awesome/css/all.min.css' %}">
+
+    <script src="{% static 'lib/htmx/htmx.min.js' %}"></script>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+<!-- Navbar -->
+{% include '_components/navbar.html' %}
+<!-- End of Navbar -->
+
+<main>
+    {% block alert %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags != 'console' %}
+                    {% include '_components/alert.html' %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endblock %}
+    {% block content %}
+    {% endblock content %}
+</main>
+
+{% include '_components/footer.html' %}
+
+{% compress js %}
+    <script src="{% static 'js/site.js' %}"></script>
+    {% block script %}{% endblock %}
+{% endcompress %}
+
+{% block extra_js %}{% endblock %}
+</body>
+
+</html>

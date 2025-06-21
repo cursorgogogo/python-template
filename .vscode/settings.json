@@ -1,0 +1,118 @@
+{
+    // Python 配置
+    "python.defaultInterpreterPath": "./.venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=88",
+        "--target-version=py312"
+    ],
+    "python.sortImports.args": [
+        "--profile=black",
+        "--line-length=88"
+    ],
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "src"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    // Django 配置
+    "python.analysis.extraPaths": [
+        "./src"
+    ],
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    // 文件关联
+    "files.associations": {
+        "*.html": "django-html",
+        "*.jinja2": "jinja2",
+        "*.py": "python"
+    },
+    // 编辑器配置
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "editor.rulers": [
+        88
+    ],
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    // 文件配置
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.pytest_cache": true,
+        "**/node_modules": true,
+        "**/.venv": true,
+        "**/.git": true
+    },
+    "files.watcherExclude": {
+        "**/__pycache__/**": true,
+        "**/*.pyc": true,
+        "**/node_modules/**": true,
+        "**/.venv/**": true
+    },
+    // 搜索配置
+    "search.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/node_modules": true,
+        "**/.venv": true,
+        "**/.git": true,
+        "**/migrations": false
+    },
+    // 终端配置
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${workspaceFolder}/src"
+    },
+    // 扩展配置
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
+    // 代码片段
+    "python.snippets.enabled": true,
+    // 调试配置
+    "python.terminal.executeInFileDir": true,
+    // 自动保存
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    // 工作区设置
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.iconTheme": "vscode-icons",
+    // 语言特定设置
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "[django-html]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    // Git 配置
+    "git.ignoreLimitWarning": true,
+    "git.autofetch": true,
+    // 其他设置
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "breadcrumbs.enabled": true,
+    "editor.minimap.enabled": true,
+    "editor.wordWrap": "on"
+}
