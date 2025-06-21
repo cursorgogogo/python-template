@@ -277,6 +277,12 @@ from apps.demo.apis import router as demo_router
 api.add_router('demo', demo_router)
 ```
 
+### 启动应用
+
+```bash
+python -m pdm run python src/manage.py runserver 127.0.0.1:18080
+```
+
 ### 打开欢迎页面
 
 根据配置不同，项目实际运行的端口可能有所不同，以实际情况为准。
@@ -287,7 +293,7 @@ api.add_router('demo', demo_router)
 
 本项目使用 django-ninja 实现 API 接口，其提供了 OpenAPI 的集成功能。
 
-启动项目之后访问 http://localhost:8000/api/doc 即可查看和进行接口测试
+启动项目之后访问 http://localhost:8000/api/docs 即可查看和进行接口测试
 
 ## 配置
 
@@ -389,34 +395,3 @@ docker compose up --build
 内置有 nginx 服务器，可以提供 HTTP 服务，如需 HTTPS ，请自行搭配 swag、ACME.sh 之类的方案使用，可以看我博客的介绍。
 
 参考博客文章：[新版的Django Docker部署方案，多阶段构建、自动处理前端依赖](https://www.cnblogs.com/deali/p/18357853)
-
-
-## 相关博文
-
-公众号 | 公众号 |
-------- | ------ | 
-![](https://gitee.com/deali/CodeZone/raw/master/images/coding_lab_logo.jpg) | ![](https://gitee.com/deali/CodeZone/raw/master/images/coding_lab_qr_code.jpg)   |
-
-公众号专辑：[Django开发精选](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI3MjQ5ODU0Mg==&action=getalbum&album_id=1409752252860022785&subscene=126&scenenote=https%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzI3MjQ5ODU0Mg%3D%3D%26mid%3D2247485662%26idx%3D1%26sn%3D3dfeb8a077220afb3607abcf9dc03eb9%26chksm%3Deb30e2dfdc476bc94ad3d4314591eeb74b1a3340aaff763af81e8aa3aeb13433ad63d14f382c%26scene%3D126%26sessionid%3D1594189969%26key%3D6d309a22c00ffb6bef9cc0b9cd5a125d1e6e57036758e1406e9eb444f50e9b700fbfbda8deaa1bfc431da4096bcd3b716f4f3fbaf30d1cb13aa779da9a32cd5cb7dabfd8d4069be6e23c19759f34c9e5%26ascene%3D1%26uin%3DMjQ1NzIyMjgw%26devicetype%3DWindows%2B10%2Bx64%26version%3D62090523%26lang%3Dzh_CN%26exportkey%3DA41f2%252BxPyxQC8LkTcD3p2O0%253D%26pass_ticket%3DtRJAFFF0qD2j0C9V0754yCDjHLxEraPHwEk%252BG2geCzI%253D%26winzoom%3D1.25#wechat_redirect)
-
-知乎专栏：[程序设计实验室](https://www.zhihu.com/column/deali)
-
-StarBlog博客主页: [blog.deali.cn](http://blog.deali.cn)
-
-Django博客合集: https://www.cnblogs.com/deali/category/1799362.html
-
-- [聊聊Django应用的部署和性能的那些事儿](https://zhuanlan.zhihu.com/p/152679805)
-- [给Django Admin添加验证码和多次登录尝试限制](https://zhuanlan.zhihu.com/p/138955540)
-- [Python后端日常操作之在Django中「强行」使用MVVM设计模式](https://zhuanlan.zhihu.com/p/136571773)
-- [Python后端必须知道的Django的信号机制！](https://zhuanlan.zhihu.com/p/135361621)
-- [一小时完成后台开发：DjangoRestFramework开发实践](https://zhuanlan.zhihu.com/p/113367282)
-- [Django快速开发实践：Drf框架和xadmin配置指北](https://zhuanlan.zhihu.com/p/100135134)
-- [DjangoAdmin使用合集，DjangoAdmin的功能比你想象的强大！](https://www.cnblogs.com/deali/p/16678014.html)
-- [轻量级消息队列 Django-Q 轻度体验](https://www.cnblogs.com/deali/p/16644989.html)
-
-## LICENSE
-
-```
-Apache License Version 2.0, January 2004
-http://www.apache.org/licenses/
-```

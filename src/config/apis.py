@@ -8,6 +8,7 @@ from ninja.renderers import JSONRenderer, BaseRenderer
 from django_starter.apis import router
 from apps.account.apis import router as account_router
 from apps.demo.apis import router as demo_router
+from apps.blog.apis import router as blog_router
 
 
 class ORJSONRenderer(JSONRenderer):
@@ -38,3 +39,4 @@ api = NinjaAPI(
 api.add_router('django-starter', router)
 api.add_router('account', account_router)
 api.add_router('demo', demo_router)
+api.add_router('blog', blog_router)
